@@ -660,6 +660,8 @@ app.get('/api/branches', async (req, res) => {
         b.id,
         b.branch_code AS code,
         b.branch_name AS name,
+        b.company_id AS "companyId",
+        b.organization_id AS "organizationId",
         b.status,
         c.company_name AS "companyName",
         o.organization_name AS "organizationName"

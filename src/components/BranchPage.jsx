@@ -71,21 +71,28 @@ export default function BranchPage() {
   });
 
   const branchStatusMutation = useMutation({
-    mutationFn: (branch) =>
-      saveBranch(branch.id, {
-        ...branch,
-        status: 'Inactive',
-        code: branch.code || '',
-        name: branch.name || '',
-        companyId: branch.companyId
-      }),
-    onSuccess: () => {
-      setDeleteDialogOpen(false);
-      setSelected([]);
-      branchesQuery.refetch();
-    },
-    onError: (requestError) => window.alert(requestError.message)
-  });
+  mutationFn: (branch) => {
+    const companyId = Number(branch.companyId ?? branch.company_id);
+
+    if (!Number.isInteger(companyId) || companyId <= 0) {
+      throw new Error('Company ID is missing or invalid for this branch.');
+    }
+
+    return saveBranch(branch.id, {
+      ...branch,
+      status: 'Inactive',
+      code: branch.code || '',
+      name: branch.name || '',
+      companyId
+    });
+  },
+  onSuccess: () => {
+    setDeleteDialogOpen(false);
+    setSelected([]);
+    branchesQuery.refetch();
+  },
+  onError: (requestError) => window.alert(requestError.message)
+});
 
   const branchDeleteMutation = useMutation({
     mutationFn: (branchId) => deleteBranch(branchId),

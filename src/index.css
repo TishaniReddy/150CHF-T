@@ -231,3 +231,14 @@ tbody .selected-row:hover { background: #dcd4fa; }
   .search-fields { grid-template-columns: repeat(3, minmax(130px, 200px)); }
   .organization-form.detailed-form .form-grid, .organization-form.compact-form .form-grid { grid-template-columns: 1fr 1fr; }
 }
+.delete-dialog-actions button.inactive-action,
+.delete-dialog-actions button.inactive-action:hover,
+.delete-dialog-actions button.inactive-action:disabled,
+.delete-dialog-actions button.delete-confirm,
+.delete-dialog-actions button.delete-confirm:hover,
+.delete-dialog-actions button.delete-confirm:disabled {
+  background: #7264ad !important;
+  border-color: #7264ad !important;
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
